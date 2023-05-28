@@ -120,7 +120,7 @@ if __name__ == '__main__':
         result_str = err.read()
         has_error = True
 
-    save_file = "error.txt" if has_error else u'大姚的订单信息.mp3'
+    save_file = "error.txt" if has_error else u'识别结果.mp3'
 
     with open(save_file, 'wb') as of:
         of.write(result_str)
