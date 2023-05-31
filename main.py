@@ -10,7 +10,7 @@ index = 1
 while (flag):
     ret, frame = cap.read()
     cv2.imshow("Capture_Paizhao", frame)
-    k = cv2.waitKey(1000) & 0xFF
+    k = cv2.waitKey(1) & 0xFF
     if k == ord('s'):  # 按下s键，进入下面的保存图片操作
         cv2.imwrite("E:/PyCharm Workspaces/" + str(index) + ".jpg", frame)
         print("save" + str(index) + ".jpg successfuly!")
