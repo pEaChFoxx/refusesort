@@ -9,7 +9,13 @@ flag = cap.isOpened()
 index = 1
 while (flag):
     ret, frame = cap.read()
-    cv2.imshow("Capture_Paizhao", frame)
+
+    if ret:
+        frame = cv2.flip(frame, 1)
+        cv2.imshow('frame', frame)
+
+   # cv2.imshow("Capture_Paizhao", frame)
+
     k = cv2.waitKey(1) & 0xFF
     if k == ord('s'):  # 按下s键，进入下面的保存图片操作
         cv2.imwrite("E:/PyCharm Workspaces/" + str(index) + ".jpg", frame)
