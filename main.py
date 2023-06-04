@@ -1,9 +1,9 @@
-
 # coding:utf-8
 import cv2
 import sys
 import json
 import urllib.request
+
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 flag = cap.isOpened()
 index = 1
@@ -14,7 +14,7 @@ while (flag):
         frame = cv2.flip(frame, 1)
         cv2.imshow('frame', frame)
 
-   # cv2.imshow("Capture_Paizhao", frame)
+    # cv2.imshow("Capture_Paizhao", frame)
 
     k = cv2.waitKey(1) & 0xFF
 
@@ -23,15 +23,12 @@ while (flag):
         print("save" + str(index) + ".jpg successfuly!")
         print("-------------------------")
         index += 1
-    elif k == ord('q') :  # 按下q键，程序退出
+    elif k == ord('q'):  # 按下q键，程序退出
         break
         index = 1
 
-
-cap.release() # 释放摄像头
-cv2.destroyAllWindows()# 释放并销毁窗口
-
-
+cap.release()  # 释放摄像头
+cv2.destroyAllWindows()  # 释放并销毁窗口
 
 # 保证兼容python2以及python3
 IS_PY3 = sys.version_info.major == 3
@@ -58,18 +55,17 @@ SECRET_KEY = 'ooaSOFTgqvXRaVBYtjR8bPLBSb3myLdx'
 # 大姚的订单信息内容文本
 TEXT = "无需追忆昨日"
 
-
-
 TTS_URL = 'http://tsn.baidu.com/text2audio'
 
 """  TOKEN start """
 
 TOKEN_URL = 'http://openapi.baidu.com/oauth/2.0/token'
 
-
 """
     获取token
 """
+
+
 def fetch_token():
     params = {'grant_type': 'client_credentials',
               'client_id': API_KEY,
@@ -87,16 +83,15 @@ def fetch_token():
     if (IS_PY3):
         result_str = result_str.decode()
 
-
     result = json.loads(result_str)
 
     if ('access_token' in result.keys() and 'scope' in result.keys()):
         if not 'audio_tts_post' in result['scope'].split(' '):
-            print ('please ensure has check the tts ability')
+            print('please ensure has check the tts ability')
             exit()
         return result['access_token']
     else:
-        print ('please overwrite the correct API_KEY and SECRET_KEY')
+        print('please overwrite the correct API_KEY and SECRET_KEY')
         exit()
 
 
@@ -138,3 +133,7 @@ if __name__ == '__main__':
         print("tts api  error:" + result_str)
 
     print("file saved as : " + save_file)
+
+from playsound import playsound
+
+playsound('识别结果.mp3')
